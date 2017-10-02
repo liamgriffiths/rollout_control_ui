@@ -1,24 +1,43 @@
-# README
+# Rollout Control UI
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Super simple web UI for controlling (rollout)[#] feature flags.
 
-Things you may want to cover:
+## Deploy to Heroku
 
-* Ruby version
+Add these environment variables to the app.
 
-* System dependencies
+```
+BASIC_AUTH_USERNAME=...
+BASIC_AUTH_PASSWORD=...
+REDIS_URL=...
+```
 
-* Configuration
 
-* Database creation
+## Development
 
-* Database initialization
+```bash
+# Run the React app (with the webpack dev server at http://localhost:3000)
+$ rake start:react
 
-* How to run the test suite
+# Run the rails-api server (runs at http://localhost:3001)
+$ rake start:rails
 
-* Services (job queues, cache servers, search engines, etc.)
+# Develop react components with Storybook - open in the browser to http://localhost:9009
+$ rake start:storybook
+```
 
-* Deployment instructions
+All these development servers will auto-restart when you make changes. Another cool thing
+is that the React app and Storybook both proxy network requests to port 3001, so they can
+make requests to the rails api.
 
-* ...
+## Credits
+
+* Rollout Gem
+* Rollout Control Gem
+* create-react-app
+* storybook
+* tachyons
+
+## Contributing
+
+Feel welcome to open issues, make pull request, or fork and do what you like. :octocat:
