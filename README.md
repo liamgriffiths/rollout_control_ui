@@ -2,7 +2,9 @@
 
 Super simple web UI for controlling (rollout)[#] feature flags.
 
-## Deploy to Heroku
+## Setup
+
+...
 
 Add these environment variables to the app.
 
@@ -14,6 +16,8 @@ REDIS_URL=...
 
 
 ## Development
+
+...
 
 ```bash
 # Run the React app (with the webpack dev server at http://localhost:3000)
@@ -27,7 +31,7 @@ $ rake start:storybook
 ```
 
 All these development servers will auto-restart when you make changes. Another cool thing
-is that the React app and Storybook both proxy network requests to port 3001, so they can
+is that the React app and Storybook both proxy network requests to port `3001`, so they can
 make requests to the rails api.
 
 ## Credits
@@ -40,4 +44,4 @@ make requests to the rails api.
 
 ## Contributing
 
-Feel welcome to open issues, make pull request, or fork and do what you like. :octocat:
+Feel welcome to open issues, make pull request, or fork and do what you like. :victory:
