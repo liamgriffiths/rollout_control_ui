@@ -21,17 +21,17 @@ class Features extends Component<Props, State> {
       <article onClick={handleClick} className="pv3 fl w-100 w-third-l sans-serif pointer hover-dark-blue">
         <h2 className="f4 f2-ns fw6 mb2">{name}</h2>
         <div className="w-100 overflow-auto near-black">
-          <dl class="dib mr5 mt0">
-            <dt class="f6 db">Percentage </dt>
-            <dd class="db pl0 ml0 f4 f2-ns b">{ percentage }%</dd>
+          <dl className="dib mr5 mt0">
+            <dt>Percentage </dt>
+            <dd className="db pl0 ml0 f4 f2-ns b">{ percentage }%</dd>
           </dl>
-          <dl class="dib mr5 mt0">
-            <dt class="f6 db">Users </dt>
-            <dd class="db pl0 ml0 f4 f2-ns b">{ users.length }</dd>
+          <dl className="dib mr5 mt0">
+            <dt className="f6 db">Users </dt>
+            <dd className="db pl0 ml0 f4 f2-ns b">{ users.length }</dd>
           </dl>
-          <dl class="dib mr5 mt0">
-            <dt class="f6 db">Groups </dt>
-            <dd class="db pl0 ml0 f4 f2-ns b">{ groups.length }</dd>
+          <dl className="dib mr5 mt0">
+            <dt className="f6 db">Groups </dt>
+            <dd className="db pl0 ml0 f4 f2-ns b">{ groups.length }</dd>
           </dl>
         </div>
       </article>
@@ -59,7 +59,7 @@ class Features extends Component<Props, State> {
   render() {
     const { Feature } = Features
     const features = Features.groupFeatures(this.props.features)
-    const renderFeature = (feature) => <Feature feature={feature} onSelect={this.props.onSelect} />
+    const renderFeature = (feature) => <Feature key={feature.name} feature={feature} onSelect={this.props.onSelect} />
 
     return (
       <div>

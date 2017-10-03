@@ -8,6 +8,7 @@ import '../index.css'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Features from '../components/Features'
+import EditFeature from '../components/EditFeature'
 
 storiesOf('Header', module)
   .add('Display', () => <Header />)
@@ -15,8 +16,8 @@ storiesOf('Header', module)
 storiesOf('Footer', module)
   .add('Display', () => <Footer />)
 
-storiesOf('Features', module)
-  .add('List', () => {
+storiesOf('Features List', module)
+  .add('List (active/inactive)', () => {
     const features = [{
       name: 'cool_feature',
       percentage: 47,
@@ -39,4 +40,9 @@ storiesOf('Features', module)
       groups: ['admins', 'moderators']
     }
     return <Features.Feature feature={feature} onSelect={action('onSelect')} />
+  })
+
+storiesOf('Edit Feature', module)
+  .add('Form', () => {
+    return <EditFeature featureName={"jerrytest"} />
   })
