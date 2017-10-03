@@ -78,7 +78,7 @@ export default class Modal extends Component<Props, State> {
         isOpen={isOpen}
         style={style}
         shouldCloseOnOverlayClick={false}>
-        <article className="pa7-ns">
+        <article className="mw6" style={{ margin: '0 auto', padding: '0 1rem' }}>
           <div className="center relative pa0">
             <a className="absolute top-0 right-0 white pvs tc f1 pointer" onClick={onClose}>&times;</a>
             { children }
