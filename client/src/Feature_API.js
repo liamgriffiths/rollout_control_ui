@@ -37,31 +37,31 @@ export default {
     return request('get', `/rollout/features/${featureId}`)
   },
 
-  setPercentage: (featureId: string, percentage: number) => {
+  setPercentage: (featureId: string, percentage: number): void => {
     return request('put', `/rollout/features/${featureId}`, { percentage })
   },
 
-  users: (featureId: string): * => {
+  users: (featureId: string): Array<number> => {
     return request('get', `/rollout/features/${featureId}/users`)
   },
 
-  addUser: (featureId: string, userId: number): * => {
+  addUser: (featureId: string, userId: number): void => {
     return request('post', `/rollout/features/${featureId}/users`, { user_id: userId })
   },
 
-  removeUser: (featureId: string, userId: number): * => {
+  removeUser: (featureId: string, userId: number): void => {
     return request('delete', `/rollout/features/${featureId}/users/${userId}`)
   },
 
-  groups: (featureId: string): * => {
+  groups: (featureId: string): Array<string> => {
     return request('get', `/rollout/features/${featureId}/groups`)
   },
 
-  addGroup: (featureId: string, group: string): * => {
+  addGroup: (featureId: string, group: string): void => {
     return request('post', `/rollout/features/${featureId}/groups`, { group })
   },
 
-  removeGroup: (featureId: string, group: string): * => {
+  removeGroup: (featureId: string, group: string): void => {
     return request('delete', `/rollout/features/${featureId}/groups/${group}`)
   }
 }

@@ -5,27 +5,20 @@ import ReactModal from 'react-modal'
 
 // style copied (mostly) from docs
 const style = {
-  overlay : {
-    position          : 'fixed',
-    top               : 0,
-    left              : 0,
-    right             : 0,
-    bottom            : 0,
-    backgroundColor   : 'rgba(0, 0, 0, 0)'
-  },
+  overlay : { position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 },
   content : {
-    position                   : 'absolute',
-    top                        : '0 ',
-    left                       : '0',
-    right                      : '0',
-    bottom                     : '0',
-    border                     : 'none',
-    background                 : 'rgba(0, 0, 0, 0.9)',
-    overflow                   : 'auto',
-    WebkitOverflowScrolling    : 'touch',
-    borderRadius               : '0',
-    outline                    : 'none',
-    padding                    : '0'
+    position: 'absolute',
+    top: '0 ',
+    left: '0',
+    right: '0',
+    bottom: '0',
+    border: 'none',
+    background: 'none',
+    overflow: 'auto',
+    WebkitOverflowScrolling: 'touch',
+    borderRadius: '0',
+    outline: 'none',
+    padding: '0'
   }
 }
 
@@ -75,15 +68,16 @@ export default class Modal extends Component<Props, State> {
     const { isOpen, onClose, children } = this.props
     return (
       <ReactModal
+        contentLabel=""
         isOpen={isOpen}
         style={style}
         shouldCloseOnOverlayClick={false}>
-        <article className="mw6" style={{ margin: '0 auto', padding: '0 1rem' }}>
-          <div className="center relative pa0">
-            <a className="absolute top-0 right-0 white pvs tc f1 pointer" onClick={onClose}>&times;</a>
+        <div className="absolute bg-black-80 w-100 h-100" onClick={onClose}>
+          <a className="absolute top-1 right-2 grow white pvs pa2 tc f1 pointer z-1" onClick={onClose}>&times;</a>
+          <div className="center relative pa0 h-100 mt6-l" onClick={(event: *) => event.stopPropagation()}>
             { children }
           </div>
-        </article>
+        </div>
       </ReactModal>
     )
   }

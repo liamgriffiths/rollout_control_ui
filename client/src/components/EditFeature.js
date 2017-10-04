@@ -5,19 +5,16 @@ import type { Feature } from '../types'
 import FeatureAPI from '../Feature_API'
 
 type Props = {
-  featureName: string,
+  feature: Feature,
   onChange: () => void
 }
 
 type State = {
-  feature: ?Feature
 }
 
 export default class EditFeature extends Component<Props, State> {
   props: Props
-  state: State = {
-    feature: null
-  }
+  state: State
 
   static PercentageForm = (props: { percentage: number, onChange: (percentage: number) => void }) => {
     const handleSubmit = (event: e) => {
@@ -27,16 +24,12 @@ export default class EditFeature extends Component<Props, State> {
     }
 
     return (
-      <form>
-        <div className="measure">
-          <label>
-            <h3 className="">Percentage</h3>
-            <form onSubmit={handleSubmit}>
-              <input name="percentage" className="input-reset bg-transparent white bn pt3 pb3 mw4 f1" type="number" defaultValue={props.percentage} />
-            </form>
-          </label>
-        </div>
-      </form>
+      <div className="w-100 pb3">
+        <form onSubmit={handleSubmit}>
+          <h2>Percentage <button type="submit" className="green pointer pl2 f5 ttu tracked fw6 sans-serif grow bg-transparent bn">Update</button></h2>
+          <input name="percentage" className="input-reset f1 bn bg-transparent light-blue code w-20" type="phone" defaultValue={props.percentage} placeholder="0 - 100"/>
+        </form>
+      </div>
     )
   }
 
@@ -56,9 +49,9 @@ export default class EditFeature extends Component<Props, State> {
       }
 
       return (
-        <div className="pb3">
+        <div className="pb4">
           <a onClick={handleRemoveClick} className="red pointer">
-            <code className="light-blue">{ item } </code> &times;
+            <code className="light-blue">{ item } </code> <span className="f4">&times;</span>
           </a>
         </div>
       )
@@ -72,7 +65,7 @@ export default class EditFeature extends Component<Props, State> {
 
     return (
       <div>
-        <h2>{ title } <a onClick={handleAddClick} className="green pointer f3 pl3">Add</a> </h2>
+        <h2 >{ title } <button onClick={handleAddClick} className="green pointer pl2 f5 ttu tracked fw6 sans-serif grow bg-transparent bn">Add</button></h2>
         <div className="measure">
         { items.map((item) => <Row key={item} item={item} />) }
         </div>
@@ -80,19 +73,9 @@ export default class EditFeature extends Component<Props, State> {
     )
   }
 
-  componentDidMount() {
-    this.reloadFeature()
-  }
-
-  reloadFeature = async () => {
-    const feature = await FeatureAPI.find(this.props.featureName)
-    this.setState({ feature })
-  }
-
   update = async (req) => {
     try {
-      await req(this.state.feature.name)
-      this.reloadFeature()
+      await req(this.props.feature.name)
       this.props.onChange()
     } catch(err) {
       alert(err.message)
@@ -107,16 +90,18 @@ export default class EditFeature extends Component<Props, State> {
 
   render() {
     const { PercentageForm, ListEdit } = EditFeature
-    const { feature } = this.state
-
-    if (!feature) return <h1>Loading</h1>
+    const { feature } = this.props
 
     return (
-      <article className="sans-serif pa3 f4 white pa1">
-        <h1>{ feature.name }</h1>
-        <PercentageForm percentage={feature.percentage} onChange={this.handlePercentageChange} />
-        <ListEdit title="Users" items={feature.users} onAdd={this.handleUserAdd} onRemove={this.handleUserRemove} />
-        <ListEdit title="Groups" items={feature.groups} onAdd={this.handleGroupAdd} onRemove={this.handleGroupRemove} />
+      <article className="sans-serif white bg-black mw7 center" style={{ margin: 'auto' }}>
+        <header className="w-100 bg-gold black pa3 ph5-ns">
+          <h1 className="f2 mt3 mb3">{ feature.name }</h1>
+        </header>
+        <div className="pa3 pb5 ma0 ph5-ns">
+          <PercentageForm percentage={feature.percentage} onChange={this.handlePercentageChange} />
+          <ListEdit title="Users" items={feature.users} onAdd={this.handleUserAdd} onRemove={this.handleUserRemove} />
+          <ListEdit title="Groups" items={feature.groups} onAdd={this.handleGroupAdd} onRemove={this.handleGroupRemove} />
+        </div>
       </article>
     )
   }

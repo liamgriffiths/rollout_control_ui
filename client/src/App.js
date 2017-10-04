@@ -6,24 +6,19 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import Features from './components/Features'
 import EditFeature from './components/EditFeature'
+import Signin from './components/Signin'
 import Modal from './components/Modal'
 
 type Props = {}
 type State = {
   features: Array<Feature>,
-  selectedFeature: ?Feature
+  selectedFeature: ?string
 }
 
-// todo:
-// 2. form to change percentage
-// 3. form to change users
-// 4. form to change groups
-// 5. flash to show success/errors
-// 6. login/auth
-
-class App extends Component<Props, State> {
+export default class App extends Component<Props, State> {
   state: State = {
-    features: []
+    features: [],
+    selectedFeature: null
   }
 
   // close any open modal on ESC press
@@ -39,8 +34,12 @@ class App extends Component<Props, State> {
   }
 
   reloadFeatures = async () => {
-    const features = await FeatureAPI.all()
-    this.setState({ features })
+    try {
+      const features = await FeatureAPI.all()
+      this.setState({ features })
+    } catch(err) {
+      Modal.show(<Signin />)
+    }
   }
 
   handleSignin = async (username: string, password: string) => {
@@ -48,12 +47,17 @@ class App extends Component<Props, State> {
     // set username and pass in local storage
   }
 
-  handleSelect = async (name: string) => {
-    Modal.show(<EditFeature featureName={name} onChange={this.reloadFeatures} />)
+  handleSelect = (feature: Feature) => {
+    this.setState({ selectedFeature: feature.name })
   }
 
   render() {
-    const { features } = this.state
+    const { features, selectedFeature } = this.state
+
+    if (selectedFeature) {
+      const feature = this.state.features.find((feature) => feature.name === selectedFeature)
+      Modal.show(<EditFeature feature={feature} onChange={this.reloadFeatures} />)
+    }
 
     return (
       <div id="App" className="w-100">
@@ -64,5 +68,3 @@ class App extends Component<Props, State> {
     );
   }
 }
-
-export default App;

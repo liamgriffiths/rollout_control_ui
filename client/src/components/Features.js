@@ -5,7 +5,7 @@ import type { Feature } from '../types'
 
 type Props = {
   features: Array<Feature>,
-  onSelect: (name: string) => void
+  onSelect: (feature: Feature) => void
 }
 
 type State = {
@@ -15,11 +15,11 @@ class Features extends Component<Props, State> {
 
   static Feature = (props: { onSelect: (name: string) => void, feature: Feature }) => {
     const { name, percentage, users, groups } = props.feature
-    const handleClick = (event: *) => props.onSelect(props.feature.name)
+    const handleClick = (event: *) => props.onSelect(props.feature)
 
     return (
       <article onClick={handleClick} className="pv3 fl w-100 w-third-l sans-serif pointer hover-dark-blue">
-        <h2 className="f4 f2-ns fw6 mb2">{name}</h2>
+        <h2 className="f4 f2-ns fw6 mb3">{name}</h2>
         <div className="w-100 overflow-auto near-black">
           <dl className="dib mr5 mt0">
             <dt>Percentage </dt>
