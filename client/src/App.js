@@ -8,6 +8,7 @@ import Features from './components/Features'
 import EditFeature from './components/EditFeature'
 import Signin from './components/Signin'
 import Modal from './components/Modal'
+import credentials from './credentials'
 
 type Props = {}
 type State = {
@@ -38,13 +39,16 @@ export default class App extends Component<Props, State> {
       const features = await FeatureAPI.all()
       this.setState({ features })
     } catch(err) {
-      Modal.show(<Signin />)
+      if (err.message === 'unauthorized') {
+        Modal.show(<Signin onSubmit={this.handleSignin} />)
+      }
     }
   }
 
-  handleSignin = async (username: string, password: string) => {
-    // try to reload features.
-    // set username and pass in local storage
+  handleSignin = (username: string, password: string) => {
+    Modal.close()
+    credentials.set(username, password)
+    this.reloadFeatures()
   }
 
   handleSelect = (feature: Feature) => {

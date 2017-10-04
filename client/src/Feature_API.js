@@ -1,18 +1,17 @@
 // @flow
 import type { Feature } from './types'
+import credentials from './credentials'
 
 type Method = 'get' | 'post' | 'put' | 'delete'
 const request = async (method: Method, path: string, body: ?Object) => {
   const url = new URL(`${window.location.origin}${path}`)
 
-  const username = 'admin'
-  const password = 'password'
-  const credentials = window.btoa(`${username}:${password}`)
+  const authorization = credentials.get()
 
   const headers = new Headers()
   headers.append('Accept', 'application/json')
   headers.append('Content-Type', 'application/json')
-  headers.append('Authorization', `Basic ${credentials}`)
+  headers.append('Authorization', `Basic ${authorization}`)
 
   const options = body ? { method, headers, body: JSON.stringify(body) } : { method, headers }
 
@@ -24,7 +23,11 @@ const request = async (method: Method, path: string, body: ?Object) => {
       return json
     }
   } else {
-    throw new Error('request failed')
+    if (res.status === 401) {
+      throw new Error('unauthorized')
+    } else {
+      throw new Error('bad request')
+    }
   }
 }
 
