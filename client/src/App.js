@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import './App.css'
+
 import type { Feature } from './types'
 import FeatureAPI from './Feature_API'
 import Header from './components/Header'
@@ -64,7 +66,7 @@ export default class App extends Component<Props, State> {
     }
 
     return (
-      <div id="App" className="w-100">
+      <div className="app">
         <Header />
         { features && <Features features={features} onSelect={this.handleSelect} /> }
         <Footer />

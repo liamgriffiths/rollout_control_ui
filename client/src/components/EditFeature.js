@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import type { Feature } from '../types'
 import FeatureAPI from '../Feature_API'
+import './EditFeature.css'
 
 type Props = {
   feature: Feature,
@@ -93,11 +94,11 @@ export default class EditFeature extends Component<Props, State> {
     const { feature } = this.props
 
     return (
-      <article className="sans-serif white bg-black mw7 center" style={{ margin: 'auto' }}>
-        <header className="w-100 bg-gold black pa3 ph5-ns">
-          <h1 className="f2 mt3 mb3">{ feature.name }</h1>
+      <article className="edit-feature sans-serif white bg-black mw7 center">
+        <header>
+          <h1>{ feature.name }</h1>
         </header>
-        <div className="pa3 pb5 ma0 ph5-ns">
+        <div>
           <PercentageForm percentage={feature.percentage} onChange={this.handlePercentageChange} />
           <ListEdit title="Users" items={feature.users} onAdd={this.handleUserAdd} onRemove={this.handleUserRemove} />
           <ListEdit title="Groups" items={feature.groups} onAdd={this.handleGroupAdd} onRemove={this.handleGroupRemove} />

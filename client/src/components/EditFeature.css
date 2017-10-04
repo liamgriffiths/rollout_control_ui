@@ -1,0 +1,13 @@
+.edit-feature {
+  background: black;
+}
+
+.edit-feature header {
+  background: orangered;
+  color: white;
+  padding: 1rem 1rem;
+}
+
+.edit-feature header h1 {
+  margin: 0;
+}

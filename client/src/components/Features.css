@@ -1,0 +1,57 @@
+.features {
+  padding: 3rem 3rem;
+}
+
+.features.active {
+  background: aliceblue;
+}
+
+.features.inactive {
+  background: blanchedalmond;
+}
+
+.features h2 {
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: .1rem;
+  margin-bottom: 3rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20em, auto));
+  grid-row-gap: 3rem;
+  grid-column-gap: 3rem;
+  margin: 0;
+}
+
+.feature {
+  cursor: pointer;
+}
+
+.feature h1 {
+  font-size: 2.5rem;
+  font-weight: 200;
+  line-height: 1;
+  margin: 0;
+}
+
+.feature dl {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 2rem;
+  max-width: 20%;
+}
+
+.feature dl dt {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.feature dl dd {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1;
+}

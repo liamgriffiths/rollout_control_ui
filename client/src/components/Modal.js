@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom';
 import ReactModal from 'react-modal'
+import './Modal.css'
 
 // style copied (mostly) from docs
 const style = {
@@ -72,12 +73,12 @@ export default class Modal extends Component<Props, State> {
         isOpen={isOpen}
         style={style}
         shouldCloseOnOverlayClick={false}>
-        <div className="absolute bg-black-80 w-100 h-100" onClick={onClose}>
-          <a className="absolute top-1 right-2 grow white pvs pa2 tc f1 pointer z-1" onClick={onClose}>&times;</a>
-          <div className="center relative pa0 h-100 mt6-l" onClick={(event: *) => event.stopPropagation()}>
+        <section className="modal" onClick={onClose}>
+          <a className="close-x" onClick={onClose}>&times;</a>
+          <div className="content" onClick={(event: *) => event.stopPropagation()}>
             { children }
           </div>
-        </div>
+        </section>
       </ReactModal>
     )
   }

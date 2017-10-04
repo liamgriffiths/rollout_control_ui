@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react'
 import type { Feature } from '../types'
+import './Features.css'
 
 type Props = {
   features: Array<Feature>,
@@ -15,25 +16,21 @@ class Features extends Component<Props, State> {
 
   static Feature = (props: { onSelect: (name: string) => void, feature: Feature }) => {
     const { name, percentage, users, groups } = props.feature
-    const handleClick = (event: *) => props.onSelect(props.feature)
+    const handleClick = (event: *) => {
+      props.onSelect(props.feature)
+    }
 
     return (
-      <article onClick={handleClick} className="pv3 fl w-100 w-third-l sans-serif pointer hover-dark-blue">
-        <h2 className="f4 f2-ns fw6 mb3">{name}</h2>
-        <div className="w-100 overflow-auto near-black">
-          <dl className="dib mr5 mt0">
-            <dt>Percentage </dt>
-            <dd className="db pl0 ml0 f4 f2-ns b">{ percentage }%</dd>
-          </dl>
-          <dl className="dib mr5 mt0">
-            <dt className="f6 db">Users </dt>
-            <dd className="db pl0 ml0 f4 f2-ns b">{ users.length }</dd>
-          </dl>
-          <dl className="dib mr5 mt0">
-            <dt className="f6 db">Groups </dt>
-            <dd className="db pl0 ml0 f4 f2-ns b">{ groups.length }</dd>
-          </dl>
-        </div>
+      <article className="feature" onClick={handleClick}>
+        <h1>{name}</h1>
+        <dl>
+          <dt>Percentage </dt>
+          <dt>Users </dt>
+          <dt>Groups </dt>
+          <dd>{ percentage }%</dd>
+          <dd>{ users.length }</dd>
+          <dd>{ groups.length }</dd>
+        </dl>
       </article>
     )
   }
@@ -62,16 +59,20 @@ class Features extends Component<Props, State> {
     const renderFeature = (feature) => <Feature key={feature.name} feature={feature} onSelect={this.props.onSelect} />
 
     return (
-      <div>
-        <section className="cf ph3 ph5-ns pb5 bg-washed-blue navy">
-          <h1 className="fl w-100 mt5 f5 ttu tracked fw6 sans-serif">Active ({ features.active.length })</h1>
-          { features.active.map(renderFeature) }
+      <main>
+        <section className="active features">
+          <h2>Active ({ features.active.length })</h2>
+          <div className="grid">
+            { features.active.map(renderFeature) }
+          </div>
         </section>
-        <section className="cf ph3 ph5-ns pb5 bg-washed-yellow navy">
-          <h1 className="fl w-100 mt5 f5 ttu tracked fw6 sans-serif">Inactive ({ features.inactive.length })</h1>
-          { features.inactive.map(renderFeature) }
+        <section className="inactive features">
+          <h2>Inactive ({ features.inactive.length })</h2>
+          <div className="grid">
+            { features.inactive.map(renderFeature) }
+          </div>
         </section>
-      </div>
+      </main>
     )
   }
 }
